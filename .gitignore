@@ -1,0 +1,11 @@
+# .gitignore
+
+# .vs
+**/.vs
+**/**/.vs
+# .vscode
+**/.vscode
+**/**/.vscode
+
+**/**/bin/*
+**/**/obj/*
