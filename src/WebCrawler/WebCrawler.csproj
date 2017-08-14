@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0">
+
+  <ItemGroup>
+    <ProjectReference Include="..\VeiculosWebApi\VeiculosWebApi.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp1.1</TargetFramework>
+    <RunTimeIdentifiers>win10-x64</RunTimeIdentifiers>
+  </PropertyGroup>
+
+</Project>
