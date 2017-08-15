@@ -31,7 +31,7 @@ namespace VeiculosWebApi.Services
 
         public async Task<IEnumerable<Modelo>> Ativos()
         {
-            return Modelo.Ativos(await ListAllAsync());
+            return Modelo.ActiveTrue(await ListAllAsync());
         }
 
         public async Task<IEnumerable<Modelo>> PorMarca(string categoria, string marca)

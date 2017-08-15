@@ -1,19 +1,19 @@
-﻿// Class base for entities properties
+﻿using System.Collections.Generic;
+using System.Linq;
+
 namespace VeiculosWebApi.Models
 {
-    public class EntityBase
+    // Class base for entities properties
+    public abstract class EntityBase<TEntity>
     {
         public string Id { get; set;}
 
         public string CreateTimeStamp { get; set;}
 
         public string ModificationTimeStamp { get; set; }
-        
-        public bool Active { get; set;}
-    }
 
-    public class EntityBaseWithName : EntityBase
-    {
-        public string Name { get; set; }
+        public bool Active { get; set;}
+
+        public abstract IEnumerable<TEntity> ActiveTrue(IEnumerable<TEntity> entities);
     }
 }

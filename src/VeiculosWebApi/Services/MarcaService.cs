@@ -26,7 +26,7 @@ namespace VeiculosWebApi.Services
         // Retorna todas as marcas com status ativo
         public async Task<IEnumerable<Marca>> Ativas()
         {
-            return Marca.Ativas(await ListAllAsync());
+            return Marca.ActiveTrue(await ListAllAsync());
         }
 
         // Retorna todas as marcas de uma categoria
@@ -35,9 +35,9 @@ namespace VeiculosWebApi.Services
             return Marca.PorCategoria(await ListAllAsync(), "categorias/"+categoria.ToLower());
         }
 
-        public async Task<Marca> PorNome(string categoria, string nome)
+        public async Task<Marca> PorCategoriaENome(string categoria, string nome)
         {
-            return Marca.PorNome(await ListAllAsync(), "categorias/"+categoria.ToLower(), nome.ToUpper());
+            return Marca.PorCategoriaENome(await ListAllAsync(), "categorias/"+categoria.ToLower(), nome.ToUpper());
         }
     }
 }

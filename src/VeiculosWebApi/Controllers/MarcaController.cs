@@ -79,11 +79,11 @@ namespace VeiculosWebApi.Controllers
                 return Json(null);
         }
 
-        // GET: MARCA POR NOME E CATEGORIA
-        [HttpGet("pornome/{categoria}/{nome}")]
-        public async Task<JsonResult> PorNome(string categoria, string nome)
+        // GET: MARCA POR CATEGORIA E NOME
+        [HttpGet("porcategoriaenome/{categoria}/{nome}")]
+        public async Task<JsonResult> PorCategoriaENome(string categoria, string nome)
         {
-            var result = await marcaService.PorNome(categoria, nome);
+            var result = await marcaService.PorCategoriaENome(categoria, nome);
             if (result != null)
                 return Json(result);
             else

@@ -47,6 +47,6 @@ public class ExtractorToolsTests
         Assert.NotNull(extractor.Modelos);
         Assert.InRange(extractor.Modelos.Count, 1, 999999);
         foreach(var modelo in extractor.Modelos)
-            Assert.Matches(modelo.Categoria, "categories/"+categoria);
+            Assert.Matches(modelo.Categoria, "categorias/"+categoria);
     }
 }

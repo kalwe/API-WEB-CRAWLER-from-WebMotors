@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace VeiculosWebApi.Models
 {
-    public class Modelo : EntityBaseWithName
+    public class Modelo : EntityBaseWithName<Modelo>
     {
         public string Marca { get; set; }
 
@@ -11,7 +11,7 @@ namespace VeiculosWebApi.Models
 
         public ICollection<string> Versao { get; set; }
 
-        public IEnumerable<Modelo> Ativos(IEnumerable<Modelo> modelo)
+        public override IEnumerable<Modelo> ActiveTrue(IEnumerable<Modelo> modelo)
         {
             return modelo.Where(x => x.Active);
         }
@@ -19,6 +19,11 @@ namespace VeiculosWebApi.Models
         public IEnumerable<Modelo> PorMarca(IEnumerable<Modelo> modelos, string categoria, string marca)
         {
             return modelos.Where(x => (x.Categoria == categoria) && (x.Marca == marca));
+        }
+
+        public override Modelo PorNome(IEnumerable<Modelo> modelos, string nome)
+        {
+            return modelos.Where(x => x.Name == nome).FirstOrDefault();
         }
     }
 }

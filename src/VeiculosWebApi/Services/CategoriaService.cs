@@ -23,7 +23,7 @@ namespace VeiculosWebApi.Services
 
         public async Task<IEnumerable<Categoria>> Ativas()
         {
-            return Categoria.Ativas(await ListAllAsync());
+            return Categoria.ActiveTrue(await ListAllAsync());
         }
 
         public async Task<Categoria> PorNome(string nome)

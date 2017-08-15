@@ -12,6 +12,6 @@ namespace VeiculosWebApi.Interfaces.Services
 
         Task<IEnumerable<Marca>> PorCategoria(string category);
 
-        Task<Marca> PorNome(string categoria, string nome);
+        Task<Marca> PorCategoriaENome(string categoria, string nome);
     }
 }

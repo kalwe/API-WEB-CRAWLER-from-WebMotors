@@ -45,13 +45,13 @@ namespace VeiculosWebApiTests.Controllers
         }
 
         [Fact]
-        public async Task PorNome_DeveRetornarUmaMarcaPorNomeECategoria()
+        public async Task PorNome_DeveRetornarUmaMarcaPorCategoriaENome()
         {
             // Arrange
-            await CreateAndCommit("marcas/TestPorNome", true, null, "categorias/1", "TEST POR NOME");
+            await CreateAndCommit("marcas/TestPorCategoriaENome", true, null, "categorias/1", "TEST POR NOME");
 
             // Act
-            var result = await marcaController.PorNome("1", "TEST POR NOME");
+            var result = await marcaController.PorCategoriaENome("1", "TEST POR NOME");
             var marcaResult = result.Value as Marca;
 
             // Assert
@@ -59,13 +59,13 @@ namespace VeiculosWebApiTests.Controllers
         }
 
         [Fact]
-        public async Task NEGATIVE_MarcaPorNome_DeveRetornarUmaMarcaPorNomeECategoria()
+        public async Task NEGATIVE_PorCategoriaENome_DeveRetornarUmaMarcaPorNomeECategoria()
         {
             // Arrange
             await CreateAndCommit("marcas/TestPorNomeNEGATIVO", true, null, null, "Teste Por Nome NEGATIVO");
 
             // Act
-            var result = await marcaController.PorNome("1", "NEGATIVO");
+            var result = await marcaController.PorCategoriaENome("1", "NEGATIVO");
 
             // Assert
             Assert.Null(result.Value);

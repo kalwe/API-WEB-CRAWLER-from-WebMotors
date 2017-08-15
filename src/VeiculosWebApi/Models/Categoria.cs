@@ -3,14 +3,14 @@ using System.Linq;
 
 namespace VeiculosWebApi.Models
 {
-    public class Categoria : EntityBaseWithName
+    public class Categoria : EntityBaseWithName<Categoria>
     {
-        public IEnumerable<Categoria> Ativas(IEnumerable<Categoria> categorias)
+        public override IEnumerable<Categoria> ActiveTrue(IEnumerable<Categoria> categorias)
         {
             return categorias.Where(x => x.Active);
         }
 
-        public Categoria PorNome(IEnumerable<Categoria> categorias, string nome)
+        public override Categoria PorNome(IEnumerable<Categoria> categorias, string nome)
         {
             return categorias.Where(x => x.Name == nome).FirstOrDefault();
         }

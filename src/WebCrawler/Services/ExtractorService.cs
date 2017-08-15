@@ -54,7 +54,7 @@ namespace WebCrawler.Services
             // Extrai modelos da marca
             await extractor.ExtractModelos(marca);
 
-            var marcaResult = await marcaService.PorNome(Categoria, marca);
+            var marcaResult = await marcaService.PorCategoriaENome(Categoria, marca);
 
             // Variaveis de controle
             int gravados = 0;
