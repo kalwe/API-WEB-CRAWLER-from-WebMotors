@@ -18,7 +18,7 @@ namespace VeiculosWebApi.Services
         }
 
         // Switch active status
-       public async Task InverteActiveStatus(string id)
+        public async Task InverteActiveStatus(string id)
         {
             await SwitchInactiveStatus("marcas/"+id);
         }
@@ -35,6 +35,7 @@ namespace VeiculosWebApi.Services
             return Marca.PorCategoria(await ListAllAsync(), "categorias/"+categoria.ToLower());
         }
 
+        // Retorna todas as marcas de uma categoria por nome
         public async Task<Marca> PorCategoriaENome(string categoria, string nome)
         {
             return Marca.PorCategoriaENome(await ListAllAsync(), "categorias/"+categoria.ToLower(), nome.ToUpper());

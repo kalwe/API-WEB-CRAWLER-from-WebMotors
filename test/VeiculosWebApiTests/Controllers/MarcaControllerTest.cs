@@ -45,7 +45,7 @@ namespace VeiculosWebApiTests.Controllers
         }
 
         [Fact]
-        public async Task PorNome_DeveRetornarUmaMarcaPorCategoriaENome()
+        public async Task PorCategoriaENome_DeveRetornarUmaMarcaPorCategoriaENome()
         {
             // Arrange
             await CreateAndCommit("marcas/TestPorCategoriaENome", true, null, "categorias/1", "TEST POR NOME");
