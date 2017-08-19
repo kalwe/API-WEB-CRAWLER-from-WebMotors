@@ -16,9 +16,9 @@ namespace VeiculosWebApi.Services
             Categoria = new Categoria();
         }
 
-        public async Task InverteActiveStatus(string id)
+        public async Task SetInactiveStatus(string id)
         {
-            await SwitchInactiveStatus("categorias/"+id);
+            await AddUpdateAsync(SetActiveStatusFalse(await FindAsync(id)));
         }
 
         public async Task<IEnumerable<Categoria>> Ativas()
@@ -29,6 +29,11 @@ namespace VeiculosWebApi.Services
         public async Task<Categoria> PorNome(string nome)
         {
             return Categoria.PorNome(await ListAllAsync(), nome);
+        }
+
+        public async Task SetActiveStatus(string id)
+        {
+            await AddUpdateAsync(SetActiveStatusTrue(await FindAsync(id)));
         }
     }
 }

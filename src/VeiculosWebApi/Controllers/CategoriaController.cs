@@ -61,7 +61,7 @@ namespace VeiculosWebApi.Controllers
         [HttpPost("delete/{id}")]
         public async Task Delete(string id)
         {
-            await categoriaService.InverteActiveStatus(id);
+            await categoriaService.SetInactiveStatus("categorias/"+id);
         }
 
         // DELETE CONFIRM

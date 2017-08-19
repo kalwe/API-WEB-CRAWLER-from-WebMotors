@@ -8,9 +8,10 @@ using VeiculosWebApi.Interfaces.Services;
 
 namespace VeiculosWebApi.Services
 {
-    public class ServiceBase<TEntity> : IServiceBase<TEntity> where TEntity : class
+    public class ServiceBase<TEntity> : IServiceBase<TEntity>, ISwitchActiveStatusService<TEntity> where TEntity : class
     {
         private readonly IRepositoryBase<TEntity> _repository;
+        private readonly ISwitchActiveStatusService<TEntity> _switchActiveStatus = new SwitchActiveStatusService<TEntity>();
 
         IList<TEntity> Entities;
 
@@ -23,17 +24,29 @@ namespace VeiculosWebApi.Services
 
         // Retorna uma entidade generica, pega o valor da prop 'Active'
         // converte no tipo boolean, inverte o valor e salva no database
-        public async Task SwitchInactiveStatus(string id)
+        // public async Task SwitchActiveStatus(string id)
+        // {
+        //     var entityResult = await FindAsync(id);
+        //     var activeValue = (bool)entityResult.GetType().GetProperty("Active").GetValue(entityResult);
+
+        //     if (activeValue)
+        //         entityResult.GetType().GetProperty("Active").SetValue(entityResult, !(bool)activeValue);
+        //     else
+        //         entityResult.GetType().GetProperty("Active").SetValue(entityResult, !(bool)activeValue);
+
+        //     await AddUpdateAsync(entityResult);
+        // }
+
+        public TEntity SetActiveStatusFalse(TEntity entity)
         {
-            var entityResult = await FindAsync(id);
-            var activeValue = (bool)entityResult.GetType().GetProperty("Active").GetValue(entityResult);
+            _switchActiveStatus.SetActiveStatusFalse(entity);
+            return entity;
+        }
 
-            if (activeValue)
-                entityResult.GetType().GetProperty("Active").SetValue(entityResult, !(bool)activeValue);
-            else
-                entityResult.GetType().GetProperty("Active").SetValue(entityResult, !(bool)activeValue);
-
-            await AddUpdateAsync(entityResult);
+        public TEntity SetActiveStatusTrue(TEntity entity)
+        {
+            _switchActiveStatus.SetActiveStatusTrue(entity);
+            return entity;
         }
 
         // Add entity for commit

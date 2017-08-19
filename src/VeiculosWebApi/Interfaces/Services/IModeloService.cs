@@ -6,7 +6,9 @@ namespace VeiculosWebApi.Interfaces.Services
 {
     public interface IModeloService : IServiceBase<Modelo>
     {
-        Task InverteActiveStatus(string id);
+        Task SetInactiveStatus(string id);
+
+        Task SetActiveStatus(string id);
 
         Task<IEnumerable<Modelo>> Ativos();
 

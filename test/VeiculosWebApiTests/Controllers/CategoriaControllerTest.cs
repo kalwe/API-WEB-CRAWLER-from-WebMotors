@@ -117,7 +117,7 @@ namespace VeiculosWebApiTests.Controllers
         {
             // Arrange
             for (int i = 0; i < 4; i++)
-                await CreateAndCommit($"categorias/TestDelete{i}", true, null, null, $"Test Delete {i}");
+                await CreateAndCommit($"categorias/TestList{i}", true, null, null, $"Test List {i}");
 
             // Act
             var result = await categoriaController.List();
@@ -135,6 +135,7 @@ namespace VeiculosWebApiTests.Controllers
 
             // Act
             await categoriaController.Delete("TestDelete");
+
             var result = await serviceBase.FindAsync("categorias/TestDelete");
 
             // Assert

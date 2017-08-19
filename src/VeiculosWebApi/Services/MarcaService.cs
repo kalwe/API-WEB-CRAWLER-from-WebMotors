@@ -17,10 +17,14 @@ namespace VeiculosWebApi.Services
             Marca = new Marca();
         }
 
-        // Switch active status
-        public async Task InverteActiveStatus(string id)
+        public async Task SetInactiveStatus(string id)
         {
-            await SwitchInactiveStatus("marcas/"+id);
+            await AddUpdateAsync(SetActiveStatusFalse(await FindAsync("marcas/"+id)));
+        }
+
+        public async Task SetActiveStatus(string id)
+        {
+            await AddUpdateAsync(SetActiveStatusTrue(await FindAsync("marcas/"+id)));
         }
 
         // Retorna todas as marcas com status ativo

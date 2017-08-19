@@ -6,7 +6,9 @@ namespace VeiculosWebApi.Interfaces.Services
 {
     public interface ICategoriaService : IServiceBase<Categoria>
     {
-        Task InverteActiveStatus(string id);
+        Task SetInactiveStatus(string id);
+
+        Task SetActiveStatus(string id);
 
         Task<IEnumerable<Categoria>> Ativas();
 

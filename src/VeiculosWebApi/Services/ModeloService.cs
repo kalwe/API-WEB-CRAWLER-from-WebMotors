@@ -12,7 +12,6 @@ namespace VeiculosWebApi.Services
     public class ModeloService : ServiceBase<Modelo>, IModeloService
     {
         private static readonly IVeiculosDbContext db = new VeiculosDbContext();
-
         private static readonly IRepositoryBase<Marca> repositoryMarca = new RepositoryBase<Marca>(db);
         private readonly IMarcaService marcaService = new MarcaService(repositoryMarca);
 
@@ -24,9 +23,14 @@ namespace VeiculosWebApi.Services
             Modelo = new Modelo();
         }
 
-        public async Task InverteActiveStatus(string id)
+        public async Task SetInactiveStatus(string id)
         {
-            await SwitchInactiveStatus("modelos/"+id);
+            await AddUpdateAsync(SetActiveStatusFalse(await FindAsync("modelos/"+id)));
+        }
+
+        public async Task SetActiveStatus(string id)
+        {
+            await AddUpdateAsync(SetActiveStatusTrue(await FindAsync("modelos/"+id)));
         }
 
         public async Task<IEnumerable<Modelo>> Ativos()

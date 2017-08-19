@@ -5,8 +5,6 @@ namespace VeiculosWebApi.Interfaces.Services
 {
     public interface IServiceBase<TEntity> where TEntity : class
     {
-        Task SwitchInactiveStatus(string entity);
-
         void Add(TEntity entity);
 
         Task CommitAsync();

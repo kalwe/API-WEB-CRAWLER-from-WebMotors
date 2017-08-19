@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using VeiculosWebApi.Interfaces.Services;
 
 namespace VeiculosWebApi
 {
@@ -26,10 +27,6 @@ namespace VeiculosWebApi
             services.AddOptions();
             // Add framework services.
             services.AddMvc();
-
-            // Configure Defaults
-            // services.Configure<ConnectionStrings>(Configuration.GetSection("ConnectionStrings"));
-            // services.AddScoped(cfg => cfg.GetService<IOptions<ConnectionStrings>>().Value);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -38,7 +35,6 @@ namespace VeiculosWebApi
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
-            // Only to dev
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
