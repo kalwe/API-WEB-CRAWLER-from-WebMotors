@@ -1,24 +1,18 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using VeiculosWebApi.DbContext;
-using VeiculosWebApi.Interfaces;
 using VeiculosWebApi.Interfaces.Repositories;
 using VeiculosWebApi.Interfaces.Services;
 using VeiculosWebApi.Models;
-using VeiculosWebApi.Repositories;
 
 namespace VeiculosWebApi.Services
 {
     public class ModeloService : ServiceBase<Modelo>, IModeloService
     {
-        private static readonly IVeiculosDbContext db = new VeiculosDbContext();
-        private static readonly IRepositoryBase<Marca> repositoryMarca = new RepositoryBase<Marca>(db);
-        private readonly IMarcaService marcaService = new MarcaService(repositoryMarca);
-
         Modelo Modelo;
 
-        public ModeloService(IRepositoryBase<Modelo> repository)
-            : base(repository)
+        public ModeloService(IRepositoryBase<Modelo> repository,
+                    ISwitchActiveStatusService<Modelo> switchActiveStatus)
+            : base(repository, switchActiveStatus)
         {
             Modelo = new Modelo();
         }

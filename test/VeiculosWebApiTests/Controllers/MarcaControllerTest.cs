@@ -4,16 +4,19 @@ using System.Threading.Tasks;
 using Xunit;
 using VeiculosWebApi.Models;
 using VeiculosWebApi.Controllers;
+using VeiculosWebApi.Interfaces.Services;
+using VeiculosWebApi.Services;
 
 namespace VeiculosWebApiTests.Controllers
 {
     public class MarcaControllerTest : ControllersTestBase<Marca>
     {
+        private readonly IMarcaService marcaService = new MarcaService(repositoryBase, switchActiveStatus);
         private readonly MarcaController marcaController;
 
         public MarcaControllerTest()
         {
-            marcaController = new MarcaController();
+            marcaController = new MarcaController(marcaService);
         }
 
         [Fact]

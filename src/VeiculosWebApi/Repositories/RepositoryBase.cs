@@ -1,10 +1,10 @@
-﻿using Raven.Client;
+﻿using System;
+using System.Linq;
+using Raven.Client;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using VeiculosWebApi.Interfaces;
 using VeiculosWebApi.Interfaces.Repositories;
-using System;
-using System.Linq;
 
 namespace VeiculosWebApi.Repositories
 {

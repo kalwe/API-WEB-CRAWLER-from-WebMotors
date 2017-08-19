@@ -1,6 +1,4 @@
 using System.Reflection;
-using System.Threading.Tasks;
-using VeiculosWebApi.Interfaces.Repositories;
 using VeiculosWebApi.Interfaces.Services;
 
 namespace VeiculosWebApi.Services

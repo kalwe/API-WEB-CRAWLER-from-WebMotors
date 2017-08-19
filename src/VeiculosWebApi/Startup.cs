@@ -3,7 +3,13 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+
+using VeiculosWebApi.DbContext;
+using VeiculosWebApi.Interfaces;
+using VeiculosWebApi.Interfaces.Repositories;
 using VeiculosWebApi.Interfaces.Services;
+using VeiculosWebApi.Repositories;
+using VeiculosWebApi.Services;
 
 namespace VeiculosWebApi
 {
@@ -25,6 +31,19 @@ namespace VeiculosWebApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddOptions();
+
+            // Database Context
+            services.AddTransient<IVeiculosDbContext, VeiculosDbContext>();
+
+            // Repositories
+            services.AddSingleton(typeof(IRepositoryBase<>), typeof(RepositoryBase<>));
+
+            // Services
+            services.AddTransient(typeof(ISwitchActiveStatusService<>), typeof(SwitchActiveStatusService<>));
+            services.AddTransient<ICategoriaService, CategoriaService>();
+            services.AddTransient<IMarcaService, MarcaService>();
+            services.AddTransient<IModeloService, ModeloService>();
+
             // Add framework services.
             services.AddMvc();
         }

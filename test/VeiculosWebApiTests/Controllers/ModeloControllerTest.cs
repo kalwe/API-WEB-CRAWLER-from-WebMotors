@@ -5,16 +5,19 @@ using VeiculosWebApi.Models;
 using System.Collections.Generic;
 using NSubstitute;
 using VeiculosWebApi.Controllers;
+using VeiculosWebApi.Interfaces.Services;
+using VeiculosWebApi.Services;
 
 namespace VeiculosWebApiTests.Controllers
 {
     public class ModeloControllerTest : ControllersTestBase<Modelo>
     {
+        private readonly IModeloService modeloService = new ModeloService(repositoryBase, switchActiveStatus);
         private readonly ModeloController modeloController;
 
         public ModeloControllerTest()
         {
-            modeloController = new ModeloController();
+            modeloController = new ModeloController(modeloService);
         }
 
         [Fact]

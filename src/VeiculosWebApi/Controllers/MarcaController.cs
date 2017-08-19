@@ -1,37 +1,35 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using System.Linq;
-using VeiculosWebApi.DbContext;
-using VeiculosWebApi.Interfaces;
-using VeiculosWebApi.Interfaces.Repositories;
 using VeiculosWebApi.Models;
-using VeiculosWebApi.Repositories;
 using VeiculosWebApi.Interfaces.Services;
-using VeiculosWebApi.Services;
 
 namespace VeiculosWebApi.Controllers
 {
     [Route("[Controller]")]
     public class MarcaController : Controller
     {
-        private static readonly IVeiculosDbContext db = new VeiculosDbContext();
-        private static readonly IRepositoryBase<Marca> repositoryBase = new RepositoryBase<Marca>(db);
-        private readonly IMarcaService marcaService = new MarcaService(repositoryBase);
+        private readonly IMarcaService _marcaService;
+
+        public MarcaController(IMarcaService marcaService)
+        {
+            _marcaService = marcaService;
+        }
 
         // POST: Add Or Update
         [HttpPost("addupdate/")]
         public async Task AddUpdateAsync(Marca marca)
         {
             marca.Name = marca.Name.ToUpper();
-            marcaService.Add(marca);
-            await marcaService.CommitAsync();
+            _marcaService.Add(marca);
+            await _marcaService.CommitAsync();
         }
 
         // GET
         [HttpGet("{id}")]
         public async Task<JsonResult> Find(string id)
         {
-            var result = await marcaService.FindAsync("marcas/"+id);
+            var result = await _marcaService.FindAsync("marcas/"+id);
             if (result != null)
                 return Json(result);
             else
@@ -41,27 +39,27 @@ namespace VeiculosWebApi.Controllers
         // GET: marcas
         public async Task<JsonResult> List()
         {
-            return Json(await marcaService.ListAllAsync());
+            return Json(await _marcaService.ListAllAsync());
         }
 
         // DELETE
         [HttpPost("delete/{id}")]
         public async Task Delete(string id)
         {
-            await marcaService.SetInactiveStatus(id);
+            await _marcaService.SetInactiveStatus(id);
         }
 
         [HttpPost("confirmdelete/{id}")]
         public async Task ConfirmDelete(string id)
         {
-            await marcaService.DeleteAsync("marcas/"+id);
+            await _marcaService.DeleteAsync("marcas/"+id);
         }
 
         // GET: ativas
         [HttpGet("ativas/")]
         public async Task<JsonResult> Active()
         {
-            var result = await marcaService.Ativas();
+            var result = await _marcaService.Ativas();
             if (result.Count() != 0)
                 return Json(result.ToList());
             else 
@@ -72,7 +70,7 @@ namespace VeiculosWebApi.Controllers
         [HttpGet("porcategoria/{categoria}")]
         public async Task<JsonResult> PorCategoria(string categoria)
         {
-            var marcas = await marcaService.PorCategoria(categoria);
+            var marcas = await _marcaService.PorCategoria(categoria);
             if (marcas.Count() != 0)
                 return Json(marcas.ToList());
             else
@@ -83,7 +81,7 @@ namespace VeiculosWebApi.Controllers
         [HttpGet("porcategoriaenome/{categoria}/{nome}")]
         public async Task<JsonResult> PorCategoriaENome(string categoria, string nome)
         {
-            var result = await marcaService.PorCategoriaENome(categoria, nome);
+            var result = await _marcaService.PorCategoriaENome(categoria, nome);
             if (result != null)
                 return Json(result);
             else

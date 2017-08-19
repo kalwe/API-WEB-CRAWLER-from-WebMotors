@@ -20,9 +20,12 @@ namespace WebCrawler.Services
         private static readonly IRepositoryBase<Marca> repositoryMarca = new RepositoryBase<Marca>(db);
         private static readonly IRepositoryBase<Modelo> repositoryModelo = new RepositoryBase<Modelo>(db);
 
+        private static readonly ISwitchActiveStatusService<Marca> marcaSwitchActiveStatus = new SwitchActiveStatusService<Marca>();
+        private static readonly ISwitchActiveStatusService<Modelo> modeloSwitchActiveStatus = new SwitchActiveStatusService<Modelo>();
+
         private readonly ICategoriaRepository categoriaController = new CategoriaRepository(db);
-        private readonly IMarcaService marcaService = new MarcaService(repositoryMarca);
-        private readonly IModeloService modeloService = new ModeloService(repositoryModelo);
+        private readonly IMarcaService marcaService = new MarcaService(repositoryMarca, marcaSwitchActiveStatus);
+        private readonly IModeloService modeloService = new ModeloService(repositoryModelo, modeloSwitchActiveStatus);
 
         private ExtractorTools extractor = new ExtractorTools();
 

@@ -12,12 +12,15 @@ namespace VeiculosWebApiTests.Controllers
     public class ControllersTestBase<TEntity> where TEntity : class
     {
         protected static readonly IVeiculosDbContext db = Substitute.For<VeiculosDbContext>();
-        private static readonly IRepositoryBase<TEntity> repositoryBase = new RepositoryBase<TEntity>(db);
+        protected static readonly IRepositoryBase<TEntity> repositoryBase = new RepositoryBase<TEntity>(db);
+
+        protected static readonly ISwitchActiveStatusService<TEntity> switchActiveStatus = new SwitchActiveStatusService<TEntity>();
+
         protected readonly IServiceBase<TEntity> serviceBase;
 
         public ControllersTestBase()
         {
-            serviceBase = new ServiceBase<TEntity>(repositoryBase);
+            serviceBase = new ServiceBase<TEntity>(repositoryBase, switchActiveStatus);
         }
 
         public async Task AddAndCommit(TEntity entity)

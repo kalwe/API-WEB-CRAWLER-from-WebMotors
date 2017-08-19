@@ -6,16 +6,23 @@ using Xunit;
 using NSubstitute;
 using VeiculosWebApi.Models;
 using VeiculosWebApi.Controllers;
+using VeiculosWebApi.Interfaces.Services;
+using VeiculosWebApi.Services;
+using VeiculosWebApi.Interfaces.Repositories;
+using VeiculosWebApi.Repositories;
+using VeiculosWebApi.Interfaces;
+using VeiculosWebApi.DbContext;
 
 namespace VeiculosWebApiTests.Controllers
 {
     public class CategoriaControllerTest : ControllersTestBase<Categoria>
     {
+        private readonly ICategoriaService categoriaService = new CategoriaService(repositoryBase, switchActiveStatus);
         private readonly CategoriaController categoriaController;
 
         public CategoriaControllerTest()
         {
-            categoriaController = new CategoriaController();
+            categoriaController = new CategoriaController(categoriaService);
         }
 
         // [Fact]

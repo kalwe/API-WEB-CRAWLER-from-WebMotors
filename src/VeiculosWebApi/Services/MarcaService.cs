@@ -10,9 +10,9 @@ namespace VeiculosWebApi.Services
     {
         private Marca Marca;
 
-        // Default Constructor
-        public MarcaService(IRepositoryBase<Marca> repository) 
-            : base(repository)
+        public MarcaService(IRepositoryBase<Marca> repository,
+                    ISwitchActiveStatusService<Marca> switchActiveStatus)
+            : base(repository, switchActiveStatus)
         {
             Marca = new Marca();
         }

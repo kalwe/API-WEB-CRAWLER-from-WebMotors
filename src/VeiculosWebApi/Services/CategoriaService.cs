@@ -10,8 +10,9 @@ namespace VeiculosWebApi.Services
     {
         private Categoria Categoria;
 
-        public CategoriaService(IRepositoryBase<Categoria> repository)
-            : base(repository)
+        public CategoriaService(IRepositoryBase<Categoria> repository,
+                    ISwitchActiveStatusService<Categoria> switchActiveStatus)
+            : base(repository, switchActiveStatus)
         {
             Categoria = new Categoria();
         }
