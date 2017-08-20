@@ -10,7 +10,7 @@ namespace VeiculosWebApi.Services
     {
         private Marca Marca;
 
-        public MarcaService(IRepositoryBase<Marca> repository,
+        public MarcaService(IMarcaRepository repository,
                     ISwitchActiveStatusService<Marca> switchActiveStatus)
             : base(repository, switchActiveStatus)
         {

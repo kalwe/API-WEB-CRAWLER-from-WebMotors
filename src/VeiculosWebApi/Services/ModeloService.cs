@@ -10,7 +10,7 @@ namespace VeiculosWebApi.Services
     {
         Modelo Modelo;
 
-        public ModeloService(IRepositoryBase<Modelo> repository,
+        public ModeloService(IModeloRepository repository,
                     ISwitchActiveStatusService<Modelo> switchActiveStatus)
             : base(repository, switchActiveStatus)
         {

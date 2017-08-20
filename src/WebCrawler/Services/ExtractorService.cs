@@ -17,15 +17,15 @@ namespace WebCrawler.Services
     public class ExtractorService : IDisposable
     {
         private static readonly IVeiculosDbContext db = new VeiculosDbContext();
-        private static readonly IRepositoryBase<Marca> repositoryMarca = new RepositoryBase<Marca>(db);
-        private static readonly IRepositoryBase<Modelo> repositoryModelo = new RepositoryBase<Modelo>(db);
+        private static readonly IMarcaRepository marcaRepository = new MarcaRepository(db);
+        private static readonly IModeloRepository modeloRepository = new ModeloRepository(db);
 
         private static readonly ISwitchActiveStatusService<Marca> marcaSwitchActiveStatus = new SwitchActiveStatusService<Marca>();
         private static readonly ISwitchActiveStatusService<Modelo> modeloSwitchActiveStatus = new SwitchActiveStatusService<Modelo>();
 
         private readonly ICategoriaRepository categoriaController = new CategoriaRepository(db);
-        private readonly IMarcaService marcaService = new MarcaService(repositoryMarca, marcaSwitchActiveStatus);
-        private readonly IModeloService modeloService = new ModeloService(repositoryModelo, modeloSwitchActiveStatus);
+        private readonly IMarcaService marcaService = new MarcaService(marcaRepository, marcaSwitchActiveStatus);
+        private readonly IModeloService modeloService = new ModeloService(modeloRepository, modeloSwitchActiveStatus);
 
         private ExtractorTools extractor = new ExtractorTools();
 

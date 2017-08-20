@@ -7,12 +7,15 @@ using NSubstitute;
 using VeiculosWebApi.Controllers;
 using VeiculosWebApi.Interfaces.Services;
 using VeiculosWebApi.Services;
+using VeiculosWebApi.Repositories;
+using VeiculosWebApi.Interfaces.Repositories;
 
 namespace VeiculosWebApiTests.Controllers
 {
     public class ModeloControllerTest : ControllersTestBase<Modelo>
     {
-        private readonly IModeloService modeloService = new ModeloService(repositoryBase, switchActiveStatus);
+        private static readonly IModeloRepository modeloRepository = new ModeloRepository(db);
+        private readonly IModeloService modeloService = new ModeloService(modeloRepository, switchActiveStatus);
         private readonly ModeloController modeloController;
 
         public ModeloControllerTest()

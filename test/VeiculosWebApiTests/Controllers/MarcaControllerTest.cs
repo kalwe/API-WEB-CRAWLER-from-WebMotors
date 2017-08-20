@@ -6,12 +6,15 @@ using VeiculosWebApi.Models;
 using VeiculosWebApi.Controllers;
 using VeiculosWebApi.Interfaces.Services;
 using VeiculosWebApi.Services;
+using VeiculosWebApi.Repositories;
+using VeiculosWebApi.Interfaces.Repositories;
 
 namespace VeiculosWebApiTests.Controllers
 {
     public class MarcaControllerTest : ControllersTestBase<Marca>
     {
-        private readonly IMarcaService marcaService = new MarcaService(repositoryBase, switchActiveStatus);
+        private static readonly IMarcaRepository marcaRepository = new MarcaRepository(db);
+        private readonly IMarcaService marcaService = new MarcaService(marcaRepository, switchActiveStatus);
         private readonly MarcaController marcaController;
 
         public MarcaControllerTest()

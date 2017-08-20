@@ -42,7 +42,6 @@ namespace VeiculosWebApi.Services
             Entities.Add(entity);
         }
 
-
         // Execute the commit in database
         public async Task CommitAsync()
         {

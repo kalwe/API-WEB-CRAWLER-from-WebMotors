@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using VeiculosWebApi.Interfaces.Repositories;
 using VeiculosWebApi.Models;
 
 namespace VeiculosWebApi.Interfaces.Services

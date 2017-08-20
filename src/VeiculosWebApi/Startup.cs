@@ -8,6 +8,7 @@ using VeiculosWebApi.DbContext;
 using VeiculosWebApi.Interfaces;
 using VeiculosWebApi.Interfaces.Repositories;
 using VeiculosWebApi.Interfaces.Services;
+using VeiculosWebApi.Models;
 using VeiculosWebApi.Repositories;
 using VeiculosWebApi.Services;
 
@@ -32,20 +33,24 @@ namespace VeiculosWebApi
         {
             services.AddOptions();
 
+            // Add framework services.
+            services.AddMvc();
+
+            // IoC
             // Database Context
             services.AddTransient<IVeiculosDbContext, VeiculosDbContext>();
 
             // Repositories
-            services.AddSingleton(typeof(IRepositoryBase<>), typeof(RepositoryBase<>));
+            // services.AddSingleton(typeof(IRepositoryBase<>), typeof(RepositoryBase<>));
+            services.AddSingleton<ICategoriaRepository, CategoriaRepository>();
+            services.AddSingleton<IMarcaRepository, MarcaRepository>();
+            services.AddSingleton<IModeloRepository, ModeloRepository>();
 
             // Services
             services.AddTransient(typeof(ISwitchActiveStatusService<>), typeof(SwitchActiveStatusService<>));
             services.AddTransient<ICategoriaService, CategoriaService>();
             services.AddTransient<IMarcaService, MarcaService>();
             services.AddTransient<IModeloService, ModeloService>();
-
-            // Add framework services.
-            services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

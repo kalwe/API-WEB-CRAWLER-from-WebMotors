@@ -24,7 +24,9 @@ namespace VeiculosWebApi.DbContext
                 Url = "http://localhost:8686/", // Url server and port
                 DefaultDatabase = "VeiculosDocs_Test" //+ DateTime.Now.Ticks
             };
+
             Store.Initialize(); // Initialize document store, to connecting with server and load configurations
+
             return (DocumentStore)Store;
         }
 

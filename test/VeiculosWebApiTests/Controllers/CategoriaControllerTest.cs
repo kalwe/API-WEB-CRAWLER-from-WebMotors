@@ -17,7 +17,8 @@ namespace VeiculosWebApiTests.Controllers
 {
     public class CategoriaControllerTest : ControllersTestBase<Categoria>
     {
-        private readonly ICategoriaService categoriaService = new CategoriaService(repositoryBase, switchActiveStatus);
+        private static readonly ICategoriaRepository categoriaRepository = new CategoriaRepository(db);
+        private readonly ICategoriaService categoriaService = new CategoriaService(categoriaRepository, switchActiveStatus);
         private readonly CategoriaController categoriaController;
 
         public CategoriaControllerTest()
