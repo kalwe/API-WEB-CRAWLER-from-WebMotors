@@ -4,7 +4,7 @@ using VeiculosWebApi.Interfaces;
 
 namespace VeiculosWebApi.DbContext
 {
-    public class VeiculosDbContext : ExceptionHelp, IVeiculosDbContext
+    public class VeiculosDbContext : IVeiculosDbContext
     {
         public IDocumentStore Store { get; internal set; }
         public IAsyncDocumentSession SessionAsync { get; internal set; }

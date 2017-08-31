@@ -17,13 +17,16 @@ namespace WebCrawler.Services
     public class ExtractorService : IDisposable
     {
         private static readonly IVeiculosDbContext db = new VeiculosDbContext();
+
+        private static readonly ICategoriaRepository categoriaRepository = new CategoriaRepository(db);
         private static readonly IMarcaRepository marcaRepository = new MarcaRepository(db);
         private static readonly IModeloRepository modeloRepository = new ModeloRepository(db);
 
+        private static readonly ISwitchActiveStatusService<Categoria> categoriaSwitchActiveStatus = new SwitchActiveStatusService<Categoria>();
         private static readonly ISwitchActiveStatusService<Marca> marcaSwitchActiveStatus = new SwitchActiveStatusService<Marca>();
         private static readonly ISwitchActiveStatusService<Modelo> modeloSwitchActiveStatus = new SwitchActiveStatusService<Modelo>();
 
-        private readonly ICategoriaRepository categoriaController = new CategoriaRepository(db);
+        private readonly ICategoriaService categoriaService = new CategoriaService(categoriaRepository, categoriaSwitchActiveStatus);
         private readonly IMarcaService marcaService = new MarcaService(marcaRepository, marcaSwitchActiveStatus);
         private readonly IModeloService modeloService = new ModeloService(modeloRepository, modeloSwitchActiveStatus);
 
@@ -34,7 +37,7 @@ namespace WebCrawler.Services
         public async Task CriarCategoria(string categoria)
         {
             // Pesquisa e retorna as marcas por categoria
-            await categoriaController.AddOrUpdateAsync(new Categoria()
+            await categoriaService.AddUpdateAsync(new Categoria()
             {
                 Id = $"categorias/{categoria}",
                 //Id = null,
@@ -110,7 +113,7 @@ namespace WebCrawler.Services
             // Imprime o resultado com o total de marcas gravas e atualizadas
             Console.WriteLine($"\nTotal de {extractor.Modelos.Count} modelos da {Categoria} da marca {marca}\n {gravados} gravados\n {alterados} alterados");
             Console.WriteLine("\n-------------------------------------------------\n");
-            Thread.Sleep(500);
+            // Thread.Sleep(500);
         }
 
         // Extrai todas as marcas das categorias 

@@ -41,7 +41,7 @@ namespace VeiculosWebApi
             services.AddTransient<IVeiculosDbContext, VeiculosDbContext>();
 
             // Repositories
-            // services.AddSingleton(typeof(IRepositoryBase<>), typeof(RepositoryBase<>));
+            services.AddSingleton(typeof(IRepositoryBase<>), typeof(RepositoryBase<>));
             services.AddSingleton<ICategoriaRepository, CategoriaRepository>();
             services.AddSingleton<IMarcaRepository, MarcaRepository>();
             services.AddSingleton<IModeloRepository, ModeloRepository>();
